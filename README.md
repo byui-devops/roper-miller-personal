@@ -1,35 +1,15 @@
-## Vue Events Bulletin Board
+This is a brief guide on how to use git.
 
-This is the code for the Vue.js [tutorial on Scotch.io](https://scotch.io/tutorials/build-a-single-page-time-tracking-app-with-vue-js-introduction). In the tutorial we build a events bulletin board application and cover the basics of [Vue](http://vuejs.org/).
+Git add allows us to stage changes so they are ready to commit. Examples git add {filename.txt} git add . The first example allows us to stage one file, while the final one allows us to stage all files within a folder Potential flags: git add -A Stage all changes, including deletions git add -p Interactively stage changes by hunk (great for precise commits)
 
+Git push sends your local commits to github so you or others can see them. Examples git push origin main This example is telling git to push our main which we are working on to our repository Potential flags: | git push -u origin main Push and set upstream (for future pushes) git push --force-with-lease Force push safely, only if no one else pushed
 
-## Installation
+Git commit creates a snapshot of the changes you have made and allows you to add a message onto the changes to descirbe what has been done Examples git commit -m "Added this readme to my first repository" This is an example of adding the message to my commit of this read me! Potential flags: git commit -m "message" Commit with a message git commit --amend -m "new message" Modify the last commit message or include new staged changes git commit --allow-empty -m "message"
 
-Change the directory to `node-bulletin-board` and follow the commands:
+We can also change the origin url using git remote Example git remote set-url origin (new url) This allows us to change where our git commits go in the case of changing our repository name
 
-1. Run `npm install`.
-2. Run `node server.js`.
-3. Visit [http://localhost:8080](http://localhost:8080).
+git stash can be used to save changes we are making that we are not ready quite yet to commit Example git stash push -m "Work in progress changes" This is a git push to save work and a message without commiting the changes Potential Flags git stash list List all stashed changes git stash apply stash@{0} Apply stash without removing it git stash pop Apply and remove the latest stash git stash branch Create a new branch from stash and apply it
 
-   <img width="1199" alt="image" src="https://github.com/user-attachments/assets/2cf0d1b5-5dde-491c-a158-8425df4576c5">
+git revert allows us to revert to a previous commit without changing the history Example git revert (commit-hash) By inserting a commit hash from previos committs we are able to move back to that last commit Potential Flags: git revert --no-edit Revert without editing commit message git revert -n Revert but do not auto-commit (stage changes instead)
 
-## Using Docker
-
-Clone the repository and run the following command:
-
-```
-docker build -t bulletin-board .
-docker run -d -p 8080:8080 bulletin-board
-```
-
-
-## RESTful API (contributed by Jason Lam)
-
-1. **Use Node.js & Express for backend server and router.**
-2. **RESTful requests towards the server to simulate CRUD on *events* model, instead of local hardcoded ones.**
-3. Translated into Traditional Chinese.
-
-## RESTful API written in Go 
-
-If you would like to use a backend written in Go, [thewhitetulip](http://github.com/thewhitetulip) has written on. See [the source code](https://github.com/thewhitetulip/go-vue-events).
- 
+git reset allows us to undo committed changes/stages Example git reset --soft This allows us to undo our last commit whit still keeping the changes staged Potential Flags: git reset HEAD1 Undo last commit, unstage changes but keep them in working directory git reset --hard HEAD1 Undo last commit and discard changes (dangerous for shared repos)
