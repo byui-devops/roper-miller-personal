@@ -9,6 +9,7 @@ on:
       - closed
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-test-deploy:
@@ -35,10 +36,4 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build Docker image
-        run: docker build -t rmiller20/bulletin-board-app:latest .
-
-      - name: Push Docker image
-        run: docker push rmiller20/bulletin-board-app:latest
