@@ -14,17 +14,15 @@
     "vue-resource": "^0.1.17"
   },
   "devDependencies": {
-   "body-parser": "^1.14.1",
+    "body-parser": "^1.14.1",
     "errorhandler": "^1.4.2",
     "method-override": "^2.3.5",
     "morgan": "^1.6.1"
   },
   "scripts": {
-    "start": "node server.js"
-  }
-  "scripts": {
+    "start": "node server.js",
     "test": "echo \"No tests yet\"",
     "test:coverage": "echo \"No coverage yet\""
+  }
 }
 
-}
