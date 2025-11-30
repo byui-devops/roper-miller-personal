@@ -29,7 +29,10 @@ jobs:
 
       - name: Install Terraform
         run: |
-          curl -fsSL https://apt.releases.hashicorp.com/install.sh | sudo bash
+          TERRAFORM_VERSION=1.6.0
+          curl -Lo terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+          unzip terraform.zip
+          sudo mv terraform /usr/local/bin/
           terraform version
 
       - name: Terraform Init
