@@ -1,43 +1,57 @@
 name: Terraform Release
 
+# Trigger manually via workflow_dispatch
 on:
   workflow_dispatch:
     inputs:
       aws_access_key_id:
-        description: "AWS Access Key ID"
+        description: 'AWS Access Key ID'
         required: true
-        type: string
       aws_secret_access_key:
-        description: "AWS Secret Access Key"
+        description: 'AWS Secret Access Key'
         required: true
-        type: string
       aws_session_token:
-        description: "AWS Session Token"
+        description: 'AWS Session Token'
         required: true
-        type: string
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout your repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials
+      # Step 2: Set AWS credentials from workflow input
+      - name: Set AWS credentials
         run: |
           echo "AWS_ACCESS_KEY_ID=${{ github.event.inputs.aws_access_key_id }}" >> $GITHUB_ENV
           echo "AWS_SECRET_ACCESS_KEY=${{ github.event.inputs.aws_secret_access_key }}" >> $GITHUB_ENV
           echo "AWS_SESSION_TOKEN=${{ github.event.inputs.aws_session_token }}" >> $GITHUB_ENV
 
+      # Step 3: Install Terraform on the runner
+      - name: Install Terraform
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnupg software-properties-common curl
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+          sudo apt-add-repository "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update && sudo apt-get install -y terraform
+          terraform version
+
+      # Step 4: Terraform Init
       - name: Terraform Init
         working-directory: ./iac
         run: terraform init
 
+      # Step 5: Terraform Plan
       - name: Terraform Plan
         working-directory: ./iac
         run: terraform plan
 
+      # Step 6: Terraform Apply
       - name: Terraform Apply
         working-directory: ./iac
         run: terraform apply --auto-approve
+
