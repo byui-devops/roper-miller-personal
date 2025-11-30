@@ -1,0 +1,43 @@
+name: Terraform Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      aws_access_key_id:
+        description: "AWS Access Key ID"
+        required: true
+        type: string
+      aws_secret_access_key:
+        description: "AWS Secret Access Key"
+        required: true
+        type: string
+      aws_session_token:
+        description: "AWS Session Token"
+        required: true
+        type: string
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ github.event.inputs.aws_access_key_id }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ github.event.inputs.aws_secret_access_key }}" >> $GITHUB_ENV
+          echo "AWS_SESSION_TOKEN=${{ github.event.inputs.aws_session_token }}" >> $GITHUB_ENV
+
+      - name: Terraform Init
+        working-directory: ./iac
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ./iac
+        run: terraform plan
+
+      - name: Terraform Apply
+        working-directory: ./iac
+        run: terraform apply --auto-approve
