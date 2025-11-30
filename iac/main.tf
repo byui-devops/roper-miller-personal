@@ -18,3 +18,4 @@ resource "aws_s3_bucket" "example_bucket" {
 resource "random_id" "rand" {
   byte_length = 4
 }
+
