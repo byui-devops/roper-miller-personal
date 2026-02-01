@@ -36,3 +36,9 @@ app.delete('/api/events/:eventId', api.event);
 
 app.listen(8080);
 console.log('Magic happens on port 8080...');
+
+function isDevelopmentEnv(env) {
+    return env === 'development' ;
+}
+
+module.exports.isDevelopmentEnv = isDevelopmentEnv;
