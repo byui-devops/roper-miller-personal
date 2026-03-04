@@ -3,6 +3,7 @@ var express        = require('express'),
     methodOverride = require('method-override'),
     errorHandler   = require('errorhandler'),
     morgan         = require('morgan'),
+    logger         = require('./logger'),
     routes         = require('./backend'),
     api            = require('./backend/api');
 
@@ -10,7 +11,10 @@ var app = module.exports = express();
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+
 app.use(morgan('dev'));
+app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
@@ -34,5 +38,5 @@ app.get('/api/events', api.events);
 app.post('/api/events', api.event);
 app.delete('/api/events/:eventId', api.event);
 
+logger.info('Magic happens on port 8080...');
 app.listen(8080);
-console.log('Magic happens on port 8080...');
