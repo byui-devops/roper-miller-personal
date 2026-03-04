@@ -6,23 +6,26 @@
   "author": "Ryan Chenkie, Jason Lam",
   "license": "MIT",
   "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.70.1",
+    "@opentelemetry/resources": "^2.5.1",
+    "@opentelemetry/sdk-node": "^0.212.0",
+    "@opentelemetry/sdk-trace-base": "^2.5.1",
+    "@opentelemetry/semantic-conventions": "^1.39.0",
     "bootstrap": "^3.3.6",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
-    "morgan": "^1.6.1",
     "vue": "^1.0.10",
-    "vue-resource": "^0.1.17"
+    "vue-resource": "^0.1.17",
+    "winston": "^3.19.0"
   },
   "devDependencies": {
     "body-parser": "^1.14.1",
     "errorhandler": "^1.4.2",
     "method-override": "^2.3.5",
-    "morgan": "^1.6.1"
+    "morgan": "^1.10.1"
   },
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"No tests yet\"",
-    "test:coverage": "echo \"No coverage yet\""
+    "start": "node server.js"
   }
 }
-
