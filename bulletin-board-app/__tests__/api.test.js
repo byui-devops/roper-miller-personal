@@ -5,7 +5,7 @@
  * Instead of making real HTTP requests, we create mock (stub) objects
  * for Express's `req` and `res` parameters. This isolates the unit
  * under test (the handler function) from the framework and network,
- * letting us verify behaviour quickly and deterministically.
+ * letting us verify behaviour quickly and deterministically..
  *
  * Contributed by: Josue Raudales
  */
