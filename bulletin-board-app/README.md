@@ -11,7 +11,9 @@ S3 Website URL: http://roper-bulletin-board.s3-website-us-east-1.amazonaws.com
 
 - POST /posts  
    https://cm0y47fnef.execute-api.us-east-1.amazonaws.com/posts
-
+  
+- DELETE /posts/{postId}
+    https://cm0y47fnef.execute-api.us-east-1.amazonaws.com/posts/{postId}
 ## DynamoDB Table Structure
 
 Table Name: BulletinPosts
@@ -27,7 +29,6 @@ Attributes:
 
 ## Architecture Diagram
 
-```text
 [ User Browser ]
         |
         v
